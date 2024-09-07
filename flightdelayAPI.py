@@ -32,6 +32,10 @@ airline_code_mapping = {
 with open("best_model.pkl", 'rb') as f:
     model = pickle.load(f)
 
+@app.get("/")
+def response_func():
+    return "Hello"
+
 @app.post('/flight-prediction')
 async def func(info: flight_info):
     # Map the carrier_code to the corresponding integer
