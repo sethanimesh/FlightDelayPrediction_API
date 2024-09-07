@@ -1,0 +1,7 @@
+{
+    "carrier_code": "AA",  
+    "scheduled_elapsed_time": 120,  
+    "delay_weather": 1, 
+    "HourlyPrecipitation_x": 3.16,  
+    "HourlyWindSpeed_x": 0.62  
+  }
