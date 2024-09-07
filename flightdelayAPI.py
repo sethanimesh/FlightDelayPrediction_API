@@ -6,10 +6,15 @@ import pandas as pd
 #Creating an instance of the application
 app = FastAPI()
 
-# Allowing CORS for the frontend running on localhost:3000
+# Allowing CORS for specific origins (replace with your frontend URL if deployed)
+origins = [
+    "http://localhost:3000",  # React development URL
+    "https://main--flighttracker.netlify.app",  # Production domain of your frontend
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://main--flighttracker.netlify.app"],  # List of allowed origins
+    allow_origins=origins,  # Allows specified origins
     allow_credentials=True,
     allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
     allow_headers=["*"],  # Allows all headers
