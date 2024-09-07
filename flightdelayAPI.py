@@ -34,7 +34,8 @@ airline_code_mapping = {
     "HA": 6,
     "NK": 7,
     "UA": 8,
-    "WN": 9
+    "WN": 9,
+    "AI": 0
 }
 
 #Loading the model
