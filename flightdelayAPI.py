@@ -14,12 +14,38 @@ class flight_info(BaseModel):
     HourlyPrecipitation_x: float
     HourlyWindSpeed_x: float
 
+# Dictionary to map airline codes to integers
+airline_code_mapping = {
+    "AA": 0,
+    "AS": 1,
+    "B6": 2,
+    "DL": 3,
+    "F9": 4,
+    "G4": 5,
+    "HA": 6,
+    "NK": 7,
+    "UA": 8,
+    "WN": 9
+}
+
 #Loading the model
 with open("best_model.pkl", 'rb') as f:
     model = pickle.load(f)
 
 @app.post('/flight-prediction')
-async def func(info:flight_info):
-    df = pd.DataFrame([info.dict().values()], columns = info.dict().keys())
+async def func(info: flight_info):
+    # Map the carrier_code to the corresponding integer
+    if info.carrier_code in airline_code_mapping:
+        info_dict = info.dict()
+        info_dict['carrier_code'] = airline_code_mapping[info.carrier_code]
+    else:
+        return {"error": "Invalid carrier code"}
+
+    # Convert the request data into a DataFrame
+    df = pd.DataFrame([info_dict.values()], columns=info_dict.keys())
+
+    # Make the prediction using the loaded model
     yhat = model.predict(df)
+
+    # Return the prediction
     return {"prediction": float(yhat[0])}
