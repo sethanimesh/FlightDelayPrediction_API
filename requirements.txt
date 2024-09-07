@@ -2,5 +2,5 @@ uvicorn
 gunicorn 
 fastapi 
 pydantic 
-sklearn 
+scikit-learn
 pandas
