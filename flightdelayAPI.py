@@ -6,6 +6,15 @@ import pandas as pd
 #Creating an instance of the application
 app = FastAPI()
 
+# Allowing CORS for the frontend running on localhost:3000
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "https://main--flighttracker.netlify.app"],  # List of allowed origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
+
 #Structure of the request body
 class flight_info(BaseModel):
     carrier_code: str
